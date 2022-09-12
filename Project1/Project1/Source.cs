@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace ComplexityLab
 {
-    public class ArrayContainer
+    public class Source
     {
         public ICollection Collection { get; private set; }
 

@@ -84,7 +84,7 @@ namespace ComplexityLab
             }
         }
 
-        private static bool PerfMalloc(ArrayContainer arrContainer, uint id, ulong size, out double elapsedMS)
+        private static bool PerfMalloc(Source arrContainer, uint id, ulong size, out double elapsedMS)
         {
             Stopwatch timer = new Stopwatch();
             timer.Start();
@@ -126,7 +126,7 @@ namespace ComplexityLab
             }
         }
 
-        private static bool PerfFree(ArrayContainer arrContainer, uint id, out double elapsedMS)
+        private static bool PerfFree(Source arrContainer, uint id, out double elapsedMS)
         {
             ulong size = validation[id];
 
@@ -168,7 +168,7 @@ namespace ComplexityLab
             return true;
         }
 
-        private static bool PerfRealloc(ArrayContainer arrContainer, uint id, ulong size, out double elapsedMS)
+        private static bool PerfRealloc(Source arrContainer, uint id, ulong size, out double elapsedMS)
         {
             if (PerfFree(arrContainer, id, out elapsedMS) == false)
             {
@@ -198,7 +198,7 @@ namespace ComplexityLab
             ulong? maxAlloc = null;
             double? maxTimeExpected = null;
             bool passed = true;
-            ArrayContainer arrContainer = new ArrayContainer();
+            Source arrContainer = new Source();
             double timeTaken = 0;
 
             if (arrContainer.Init() == false)//Let the user initialize their MM

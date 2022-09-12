@@ -3,15 +3,8 @@
 * South Hills Username: [YOUR SOUTH HILLS USERNAME HERE]
 */
 #pragma warning disable CS8618
-using Microsoft.VisualBasic;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace ComplexityLab
 {

@@ -10,7 +10,7 @@ namespace ComplexityLab
     public static class Program
     {
         private static readonly byte CORRECTNESS_SCORE = 15;
-        private static readonly byte TIME_SCORE = 30;
+        private static readonly byte TIME_SCORE = 25;
         private static readonly byte GRADEING_RUNS = 5;
 
         private static IDictionary<uint, ulong> validation = new Dictionary<uint, ulong>();
@@ -19,7 +19,7 @@ namespace ComplexityLab
         private static readonly byte MAX_SORT_COUNTER = 12;
 #endif
 #if !DEBUG
-        private static readonly byte MAX_SORT_COUNTER = 100;
+        private static readonly byte MAX_SORT_COUNTER = 1;
 #endif
         private static byte sortCounter = MAX_SORT_COUNTER;
 

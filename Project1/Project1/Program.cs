@@ -80,7 +80,7 @@ namespace ComplexityLab
 
                 Console.WriteLine("\n***Correctness index: {0:0.0}/" + CORRECTNESS_SCORE, cScore);
                 Console.WriteLine("***Performance index: {0:0.0}/" + TIME_SCORE + (filesPassed < files.Length ? "*" : ""), pScore);
-                Console.Write("\n--- Total score: {0:0.0}/" + (CORRECTNESS_SCORE + TIME_SCORE), cScore + pScore);
+                Console.Write("\n--- Total score: {0:0.0}/" + (CORRECTNESS_SCORE + TIME_SCORE) + "\n", cScore + pScore);
             }
         }
 
@@ -101,17 +101,17 @@ namespace ComplexityLab
                 elapsedMS = timer.Elapsed.TotalMilliseconds;
                 validation.Add(id, size);
 
-                if (arrContainer.ULArray == null)
+                if (arrContainer.Collection == null)
                 {
                     Console.Error.WriteLine("[ERROR]: Array is null.");
                     return false;
                 }
-                else if (arrContainer.ULArray.Count != validation.Count)
+                else if (arrContainer.Collection.Count != validation.Count)
                 {
                     Console.Error.WriteLine("[ERROR]: Array does not have the correct amount of elements.");
                     return false;
                 }
-                else if(--sortCounter == 0 && ((List<ulong>)arrContainer.ULArray).ToList().SequenceEqual(((List<ulong>)arrContainer.ULArray).OrderBy(x => x).ToList()) == false)
+                else if(--sortCounter == 0 && ((List<ulong>)arrContainer.Collection).ToList().SequenceEqual(((List<ulong>)arrContainer.Collection).OrderBy(x => x).ToList()) == false)
                 {
                     Console.Error.WriteLine("[ERROR]: Array is not sorted!");
                     return false;
@@ -144,17 +144,17 @@ namespace ComplexityLab
             elapsedMS = timer.Elapsed.TotalMilliseconds;
             validation.Remove(id);
 
-            if (arrContainer.ULArray == null)
+            if (arrContainer.Collection == null)
             {
                 Console.Error.WriteLine("[ERROR]: Array is null.");
                 return false;
             }
-            else if (arrContainer.ULArray.Count != validation.Count)
+            else if (arrContainer.Collection.Count != validation.Count)
             {
                 Console.Error.WriteLine("[ERROR]: Array does not have the correct amount of elements.");
                 return false;
             }
-            else if (--sortCounter == 0 && ((List<ulong>)arrContainer.ULArray).ToList().SequenceEqual(((List<ulong>)arrContainer.ULArray).OrderBy(x => x).ToList()) == false)
+            else if (--sortCounter == 0 && ((List<ulong>)arrContainer.Collection).ToList().SequenceEqual(((List<ulong>)arrContainer.Collection).OrderBy(x => x).ToList()) == false)
             {
                 Console.Error.WriteLine("[ERROR]: Array is not sorted!");
                 return false;

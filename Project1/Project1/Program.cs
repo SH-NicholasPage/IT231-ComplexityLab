@@ -16,12 +16,12 @@ namespace ComplexityLab
         private static IDictionary<uint, ulong> validation = new Dictionary<uint, ulong>();
 
 #if DEBUG
-        private static readonly byte MAX_SORT_COUNTER = 12;
+        private static readonly sbyte MAX_SORT_COUNTER = 12;
 #endif
 #if !DEBUG
-        private static readonly byte MAX_SORT_COUNTER = 1;
+        private static readonly sbyte MAX_SORT_COUNTER = 1;
 #endif
-        private static byte sortCounter = MAX_SORT_COUNTER;
+        private static sbyte sortCounter = MAX_SORT_COUNTER;
 
         public static void Main(string[] args)
         {
@@ -109,13 +109,13 @@ namespace ComplexityLab
                     Console.Error.WriteLine("[ERROR]: Array does not have the correct amount of elements.");
                     return false;
                 }
-                else if(--sortCounter == 0 && ((List<ulong>)arrContainer.Collection).ToList().SequenceEqual(((List<ulong>)arrContainer.Collection).OrderBy(x => x).ToList()) == false)
+                else if(--sortCounter <= 0 && ((List<ulong>)arrContainer.Collection).ToList().SequenceEqual(((List<ulong>)arrContainer.Collection).OrderBy(x => x).ToList()) == false)
                 {
                     Console.Error.WriteLine("[ERROR]: Array is not sorted!");
                     return false;
                 }
 
-                if(sortCounter == 0)
+                if(sortCounter <= 0)
                 {
                     sortCounter = MAX_SORT_COUNTER;
                 }
@@ -152,13 +152,13 @@ namespace ComplexityLab
                 Console.Error.WriteLine("[ERROR]: Array does not have the correct amount of elements.");
                 return false;
             }
-            else if (--sortCounter == 0 && ((List<ulong>)arrContainer.Collection).ToList().SequenceEqual(((List<ulong>)arrContainer.Collection).OrderBy(x => x).ToList()) == false)
+            else if (--sortCounter <= 0 && ((List<ulong>)arrContainer.Collection).ToList().SequenceEqual(((List<ulong>)arrContainer.Collection).OrderBy(x => x).ToList()) == false)
             {
                 Console.Error.WriteLine("[ERROR]: Array is not sorted!");
                 return false;
             }
 
-            if (sortCounter == 0)
+            if (sortCounter <= 0)
             {
                 sortCounter = MAX_SORT_COUNTER;
             }

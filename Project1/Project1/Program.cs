@@ -101,17 +101,17 @@ namespace ComplexityLab
 
                 if (arrContainer.Collection == null)
                 {
-                    Console.Error.WriteLine("[ERROR]: Array is null.");
+                    Console.Error.WriteLine("[ERROR]: Collection is null.");
                     return false;
                 }
                 else if (arrContainer.Collection.Count != validation.Count)
                 {
-                    Console.Error.WriteLine("[ERROR]: Array does not have the correct amount of elements.");
+                    Console.Error.WriteLine("[ERROR]: Collection does not have the correct amount of elements.");
                     return false;
                 }
                 else if(--sortCounter <= 0 && ((List<ulong>)arrContainer.Collection).ToList().SequenceEqual(((List<ulong>)arrContainer.Collection).OrderBy(x => x).ToList()) == false)
                 {
-                    Console.Error.WriteLine("[ERROR]: Array is not sorted!");
+                    Console.Error.WriteLine("[ERROR]: Collection is not sorted!");
                     return false;
                 }
 
@@ -144,17 +144,17 @@ namespace ComplexityLab
 
             if (arrContainer.Collection == null)
             {
-                Console.Error.WriteLine("[ERROR]: Array is null.");
+                Console.Error.WriteLine("[ERROR]: Collection is null.");
                 return false;
             }
             else if (arrContainer.Collection.Count != validation.Count)
             {
-                Console.Error.WriteLine("[ERROR]: Array does not have the correct amount of elements.");
+                Console.Error.WriteLine("[ERROR]: Collection does not have the correct amount of elements.");
                 return false;
             }
             else if (--sortCounter <= 0 && ((List<ulong>)arrContainer.Collection).ToList().SequenceEqual(((List<ulong>)arrContainer.Collection).OrderBy(x => x).ToList()) == false)
             {
-                Console.Error.WriteLine("[ERROR]: Array is not sorted!");
+                Console.Error.WriteLine("[ERROR]: Collection is not sorted!");
                 return false;
             }
 

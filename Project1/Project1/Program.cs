@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -152,7 +153,7 @@ namespace ComplexityLab
                 Console.Error.WriteLine("[ERROR]: Collection does not have the correct amount of elements.");
                 return false;
             }
-            else if (--sortCounter <= 0 && ((List<ulong>)arrContainer.Collection).ToList().SequenceEqual(((List<ulong>)arrContainer.Collection).OrderBy(x => x).ToList()) == false)
+            else if (--sortCounter <= 0 && IsSorted<ICollection>(arrContainer.Collection) == false)
             {
                 Console.Error.WriteLine("[ERROR]: Collection is not sorted!");
                 return false;
@@ -279,6 +280,44 @@ namespace ComplexityLab
             {
                 return file;
             }
+        }
+
+        private static bool IsSorted<T>(ICollection<T> input)
+        {
+            if (input is IOrderedEnumerable<T>)
+            {
+                return true;
+            }
+
+            var comparer = Comparer<T>.Default;
+            T previous = default(T);
+            bool previousSet = false;
+            bool? comparisonOrder = null;
+            foreach (var value in input)
+            {
+                if (!previousSet)
+                {
+                    previous = value;
+                    previousSet = true;
+                }
+                else
+                {
+                    int comparisonResult = comparer.Compare(previous, value);
+                    if (comparisonResult != 0)
+                    {
+                        if (!comparisonOrder.HasValue)
+                        {
+                            comparisonOrder = comparisonResult > 0;
+                        }
+                        else if (comparisonResult > 0 != comparisonOrder)
+                        {
+                            return false;
+                        }
+                    }
+                    previous = value;
+                }
+            }
+            return true;
         }
     }
 }

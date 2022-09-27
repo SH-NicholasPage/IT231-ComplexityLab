@@ -3,8 +3,11 @@
 * South Hills Username: [YOUR SOUTH HILLS USERNAME HERE]
 */
 #pragma warning disable CS8618
+#pragma warning disable CS8602
+#pragma warning disable CS8604
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace ComplexityLab
 {

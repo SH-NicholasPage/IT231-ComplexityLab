@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -9,9 +10,10 @@ namespace ComplexityLab
 {
     public static class Program
     {
-        private static readonly byte CORRECTNESS_SCORE = 15;
-        private static readonly byte TIME_SCORE = 25;
-        private static readonly byte GRADEING_RUNS = 5;
+        private const byte CORRECTNESS_SCORE = 15;
+        private const byte TIME_SCORE = 25;
+        private const byte GRADEING_RUNS = 5;
+
 
         private static IDictionary<uint, ulong> validation = new Dictionary<uint, ulong>();
 
@@ -93,35 +95,12 @@ namespace ComplexityLab
                 elapsedMS = timer.Elapsed.TotalMilliseconds;
                 return false;
             }
-            else
-            {
-                timer.Stop();
-                elapsedMS = timer.Elapsed.TotalMilliseconds;
-                validation.Add(id, size);
 
-                if (arrContainer.Collection == null)
-                {
-                    Console.Error.WriteLine("[ERROR]: Collection is null.");
-                    return false;
-                }
-                else if (arrContainer.Collection.Count != validation.Count)
-                {
-                    Console.Error.WriteLine("[ERROR]: Collection does not have the correct amount of elements.");
-                    return false;
-                }
-                else if(--sortCounter <= 0 && ((List<ulong>)arrContainer.Collection).ToList().SequenceEqual(((List<ulong>)arrContainer.Collection).OrderBy(x => x).ToList()) == false)
-                {
-                    Console.Error.WriteLine("[ERROR]: Collection is not sorted!");
-                    return false;
-                }
+            timer.Stop();
+            elapsedMS = timer.Elapsed.TotalMilliseconds;
+            validation.Add(id, size);
 
-                if(sortCounter <= 0)
-                {
-                    sortCounter = MAX_SORT_COUNTER;
-                }
-
-                return true;
-            }
+            return StandardCheck(arrContainer);
         }
 
         private static bool PerfFree(Source arrContainer, uint id, out double elapsedMS)
@@ -142,28 +121,7 @@ namespace ComplexityLab
             elapsedMS = timer.Elapsed.TotalMilliseconds;
             validation.Remove(id);
 
-            if (arrContainer.Collection == null)
-            {
-                Console.Error.WriteLine("[ERROR]: Collection is null.");
-                return false;
-            }
-            else if (arrContainer.Collection.Count != validation.Count)
-            {
-                Console.Error.WriteLine("[ERROR]: Collection does not have the correct amount of elements.");
-                return false;
-            }
-            else if (--sortCounter <= 0 && ((List<ulong>)arrContainer.Collection).ToList().SequenceEqual(((List<ulong>)arrContainer.Collection).OrderBy(x => x).ToList()) == false)
-            {
-                Console.Error.WriteLine("[ERROR]: Collection is not sorted!");
-                return false;
-            }
-
-            if (sortCounter <= 0)
-            {
-                sortCounter = MAX_SORT_COUNTER;
-            }
-
-            return true;
+            return StandardCheck(arrContainer);
         }
 
         private static bool PerfRealloc(Source arrContainer, uint id, ulong size, out double elapsedMS)
@@ -279,6 +237,44 @@ namespace ComplexityLab
             {
                 return file;
             }
+        }
+
+        private static bool StandardCheck(Source arrContainer)
+        {
+            bool returnStatus = true;
+
+            if (arrContainer.Collection == null)
+            {
+                Console.Error.WriteLine("[ERROR]: Collection is null.");
+                returnStatus = false;
+            }
+            else if (arrContainer.Collection.Count != validation.Count)
+            {
+                Console.Error.WriteLine("[ERROR]: Collection does not have the correct amount of elements.");
+                returnStatus = false;
+            }
+            else if (--sortCounter <= 0 && IsSorted(arrContainer.Collection) == false)
+            {
+                Console.Error.WriteLine("[ERROR]: Collection is not sorted!");
+                returnStatus = false;
+            }
+
+            if (sortCounter <= 0)
+            {
+                sortCounter = MAX_SORT_COUNTER;
+            }
+
+            return returnStatus;
+        }
+
+        private static bool IsSorted(ICollection<ulong> input)
+        {
+            if (input is IOrderedEnumerable<ulong>)
+            {
+                return true;
+            }
+
+            return Enumerable.SequenceEqual<ulong>(validation.Values.OrderBy(x => x), input);
         }
     }
 }

@@ -3,15 +3,18 @@
 * South Hills Username: [YOUR SOUTH HILLS USERNAME HERE]
 */
 #pragma warning disable CS8618
+#pragma warning disable CS8602
+#pragma warning disable CS8604
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace ComplexityLab
 {
     public class Source
     {
         //Do not change the name or accessors for the following property:
-        public ICollection Collection { get; private set; }
+        public ICollection<ulong> Collection { get; private set; }
 
         public bool Init()
         {

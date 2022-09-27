@@ -14,7 +14,7 @@ namespace ComplexityLab
     public class Source
     {
         //Do not change the name or accessors for the following property:
-        public ICollection Collection { get; private set; }
+        public ICollection<ulong> Collection { get; private set; }
 
         public bool Init()
         {
